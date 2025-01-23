@@ -1,6 +1,5 @@
 %{
-#include "dart_parser.tab.h"
-#include <stdio.h>
+    #include "dart_parser.tab.h"
 %}
 
 %%
@@ -45,6 +44,10 @@
 "!"                  { printf("Token: NOT\n"); return NOT; }
 "print"              { printf("Token: PRINT\n"); return PRINT; }
 
+"final"              { printf("Token: FINAL\n"); return FINAL; }
+"const"              { printf("Token: CONST\n"); return CONST; }
+"var"                { printf("Token: VAR\n"); return VAR; }
+
 "("                  { printf("Token: LPAREN\n"); return LPAREN; }
 ")"                  { printf("Token: RPAREN\n"); return RPAREN; }
 "{"                  { printf("Token: LBRACE\n"); return LBRACE; }
@@ -53,8 +56,11 @@
 "]"                  { printf("Token: RBRACKET\n"); return RBRACKET; }
 "."                  { printf("Token: DOT\n"); return DOT; }
 
+"?"                  { printf("Token: QUESTION\n"); return QUESTION; }  // Ternary operator
+":"                  { printf("Token: COLON\n"); return COLON; }
+
 [0-9]+               { printf("Token: NUMBER (%s)\n", yytext); return NUMBER; }
-[A-Za-z_][A-Za-z0-9_]* { printf("Token: IDENTIFIER (%s)\n", yytext); return IDENTIFIER; }
+[A-Za-z_][A-Za-z0-9_]* {printf("Token: IDENTIFIER (%s)\n", yytext);return IDENTIFIER;}
 
 \"[^\"]*\"           { printf("Token: STRING_LITERAL\n"); return STRING_LITERAL; } // String literals
 \'[^\']\'            { printf("Token: CHAR_LITERAL\n"); return CHAR_LITERAL; } // Char literals
